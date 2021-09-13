@@ -5,4 +5,6 @@ Enter your age, monthly income, current savings and monthly savings to see how y
 
 This project created using Html, Css and vanilla javascript.
 
+*It is not known whether the mathematical formulas are correct, because its one of my clients project.*
+
 *This code has been minified, so it's hard to understand. If you need actual code, please knock me.*
