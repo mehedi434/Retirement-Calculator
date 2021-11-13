@@ -1,9 +1,630 @@
-/*
-Author: Md. Mehedi Hasan.
+//Optional Section Show/Hide button
+function collapseButton() {
+    let collapseBtn = document.querySelector(".info-3-part1 button");
+    let toggle = 1;
 
-This code has been minified, so it's hard to understand. If you need actual code, please knock me.
+    collapseBtn.addEventListener("click", () => {
+        let infoSection = document.querySelector(".info-3-part2");
 
-It is not known whether the mathematical formulas are correct, because its one of my clients project.
-*/ 
+        toggle % 2 == 0
+            ? infoSection.classList.add("hidden")
+            : infoSection.classList.remove("hidden");
 
-function collapseButton(){let e=document.querySelector(".info-3-part1 button"),t=1;e.addEventListener("click",()=>{let e=document.querySelector(".info-3-part2");t%2==0?e.classList.add("hidden"):e.classList.remove("hidden"),t++})}collapseButton(),document.querySelectorAll("input").forEach(e=>{e.addEventListener("keydown",function(e){["ArrowUp","ArrowDown","+","-"].includes(e.key)&&e.preventDefault()})}),form.addEventListener("submit",function(e){e.preventDefault()});let currentAgeStatus=!0,retireAgeStatus=!0,deathAgeStatus=!0,monthlyIncomeStatus=!0,currentSavingStatus=!0,monthlySavingStatus=!0,monthlyRetirementSpendingStatus=!0,investmentRateStatus=!0,currentAge=document.querySelector("#age").value,retireAge=document.querySelector("#retireAge").value,deathAge=document.querySelector("#deathAge").value,monthlyIncome=document.querySelector("#monthlyIncome").value,currentSaving=document.querySelector("#currentSavings").value,monthlySaving=document.querySelector("#monthlySavings").value,monthlyRetirementSpending=document.querySelector("#monthlySpendings").value,investmentRate=document.querySelector("#investmentRate").value,annualInvestment=investmentRate/100,annualInflation=.03,annualRetirement=.05,toMonth=1/12;function hv01(e,t,n,r,o){let a=e=>Math.pow(1+e,toMonth)-1;return function(){let r=t-e+toMonth,a=Math.pow(1+o,r);return n*a}()+function(){let n=12*(t-e),u=(Math.pow(1+a(o),n)-1)/a(o),l=1+a(o);return r*u*l}()}function nw02(e,t,n,r){let o=12*(n-t),a=e=>Math.pow(1+e,toMonth)-1,u=r*Math.pow(1+annualInflation,t-e);return annualRetirement!=annualInflation?u/(a(annualRetirement)-a(annualInflation))*(1-Math.pow((1+a(annualInflation))/(1+a(annualRetirement)),o)):annualRetirement==annualInflation?u/(a(annualRetirement)-a(annualInflation)-1e-4)*(1-Math.pow((1+a(annualInflation)+1e-4)/(1+a(annualRetirement)),o)):void 0}function inpV(){currentAge=document.querySelector("#age").value,monthlyIncome=document.querySelector("#monthlyIncome").value,currentSaving=document.querySelector("#currentSavings").value,monthlySaving=document.querySelector("#monthlySavings").value,monthlyRetirementSpending=document.querySelector("#monthlySpendings").value,retireAge=document.querySelector("#retireAge").value,deathAge=document.querySelector("#deathAge").value,investmentRate=document.querySelector("#investmentRate").value,annualInvestment=investmentRate/100;let e=document.querySelector(".currAgeError"),t=document.querySelector(".monthlyIncomeError"),n=document.querySelector(".currentSavingError"),r=document.querySelector(".monthlySaveError"),o=document.querySelector(".monthlyRetirementSpendingError"),a=document.querySelector(".retireAgeError"),u=document.querySelector(".deathAgeError"),l=document.querySelector(".investmentRateError");currentAge<18?(currentAgeStatus=!1,e.innerHTML="Age must be at least 18"):currentAge>90?(currentAgeStatus=!1,e.innerHTML="Age must be at most 90"):currentAge>=18&&currentAge<=90&&(currentAgeStatus=!0,e.innerHTML=""),monthlyIncome.value<0?(monthlyIncomeStatus=!1,t.innerHTML="Pre-tax income should be 0 or more."):monthlyIncome.value>9e6?(monthlyIncomeStatus=!1,t.innerHTML="Pre-tax income shouldn't be more than 9000000"):monthlyIncome.value>=0&&monthlyIncome.value<=9e6&&(monthlyIncomeStatus=!0,t.innerHTML=""),currentSaving.value<0?(currentSavingStatus=!1,n.innerHTML="Current savings should be 0 or more."):currentSaving.value>9e8?(currentSavingStatus=!1,n.innerHTML="Current savings shouldn't be more than 900000000"):currentSaving.value>=0&&currentSaving.value<=9e8&&(currentSavingStatus=!0,n.innerHTML=""),function(){let e=Math.round(100*monthlySaving/monthlyIncome),t=document.querySelector(".info-2 small.incomePercent");monthlySaving<0?(monthlySavingStatus=!1,t.classList.add("hidden"),r.innerHTML="Monthly income cannot be less than 0"):e>75?(monthlySavingStatus=!1,t.classList.add("hidden"),r.innerHTML="Montly income shouldn't be more than 75% of annual income"):monthlySaving>0&&e<75&&(monthlySavingStatus=!0,t.classList.remove("hidden"),r.innerHTML="")}(),monthlyRetirementSpending<0?(monthlyRetirementSpendingStatus=!1,o.innerHTML="Monthly retirement spending shouldn't be less than 0"):monthlyRetirementSpending>0&&(monthlyRetirementSpendingStatus=!0,o.innerHTML=""),retireAge<30?(retireAgeStatus=!1,a.innerHTML="Retire age should be equal or more than 30"):retireAge>85?(retireAgeStatus=!1,a.innerHTML="Retire age should be equal or less than 85"):retireAge>=30&&retireAge<=85&&(retireAgeStatus=!0,a.innerHTML=""),deathAge<71?(deathAgeStatus=!1,u.innerHTML="Death age should be equal or more than 71"):deathAge>120?(deathAgeStatus=!1,u.innerHTML="Death age should be equal or less than 120"):deathAge>=71&&deathAge<=120&&(deathAgeStatus=!0,u.innerHTML=""),investmentRate<0?(investmentRateStatus=!1,l.innerHTML="Investment Rate should be equal or more than 0"):investmentRate>15?(investmentRateStatus=!1,l.innerHTML="Investment Rate  should be equal or less than 15"):investmentRate>=0&&investmentRate<=15&&(investmentRateStatus=!0,l.innerHTML="")}function htasd(e,t){let n=()=>{let n=Math.round(100*e/t);return n<=0?n=0:n>=100&&(n=100),n};!function(){let e=Math.round(100*monthlySaving/monthlyIncome);document.querySelector(".info-2 small.incomePercent").innerHTML=`${e}% of my monthly income`}(),document.querySelector(".retireAgeShow").innerHTML=retireAge,function(){let n=document.querySelector(".have-amount"),r=document.querySelector(".need-amount");n.innerHTML=(e/1e6).toFixed(2)+"M",r.innerHTML=(t/1e6).toFixed(2)+"M"}(),document.querySelector(".percent").innerHTML=n()+"%",function(){let n,r=document.querySelector(".output .sub-have-bar"),o=document.querySelector(".output .sub-need-bar"),a=document.querySelector(".output .have-amount"),u=document.querySelector(".output .need-amount");e<t?(n=Math.round(100*e/t))<0?(r.style.height="99.5%",o.style.height="0%",a.style.top="78%",u.style.top="-20%"):(r.style.height=`${100-n}%`,o.style.height="0%",a.style.top=`${100-n-20}%`,u.style.top="-20%"):e>t&&(n=Math.round(100*t/e),console.log(n),n<=0?(console.log("exclude"),r.style.height="0%",o.style.height="99.5%",a.style.top="-20%",u.style.top="79.5%"):(r.style.height="0%",o.style.height=`${100-n}%`,a.style.top="-20%",u.style.top=`${100-n-20}%`))}(),function(){let e=document.querySelector(".attention-describe"),t=document.querySelector(".onWay-describe "),r=document.querySelector(".gettingClose-describe"),o=document.querySelector(".onTrack-describe"),a=document.querySelector(".horizontal-progress .move .space"),u=document.querySelector(".horizontal-progress .icon .iconSpace"),l=document.querySelector(".verticale-progress .have-bar");function i(n){[e,t,r,o].forEach(e=>{e==n?e.classList.remove("hidden"):e.classList.add("hidden")})}function c(){return n()>0&&n()<=65.5?.5*n():n()>=65.6&&n()<=80.5?32.095+1.87*(n()-65.5):n()>=80.6&&n()<=95.5?32.095+28.05+1.47*(n()-80.5):n()>=95.6&&n()<=100?82.195+3.44*(n()-95.5):void 0}function s(){return n()>0&&n()<=65.5?.344*n():n()>=65.6&&n()<=80.5?65.5*.344+1.87*(n()-65.5):n()>=80.6&&n()<=95.5?65.5*.344+28.05+1.43*(n()-80.5):n()>=95.6&&n()<=100?72.032+.67*(n()-95.5):void 0}n()>=0&&n()<=65.5?(i(e),u.style.flexBasis=`${c()}%`,a.style.flexBasis=`calc(${s()}% - 26px)`,l.style.backgroundColor="#fc6f56"):n()>=65.6&&n()<=80.5?(i(t),u.style.flexBasis=`${c()}%`,a.style.flexBasis=`calc(${s()}% - 12px)`,l.style.backgroundColor="#ffbf00"):n()>=80.6&&n()<=95.5?(i(r),u.style.flexBasis=`${c()}%`,a.style.flexBasis=`calc(${s()}% - 12px)`,l.style.backgroundColor="#1cacca"):n()>=95.6&&n()<=100&&(i(o),u.style.flexBasis=`${c()}%`,a.style.flexBasis=`calc(${s()}% - 12px)`,l.style.backgroundColor="#8fd832")}()}let allInput=[document.querySelector("#age"),document.querySelector("#retireAge"),document.querySelector("#deathAge"),document.querySelector("#monthlyIncome"),document.querySelector("#currentSavings"),document.querySelector("#monthlySavings"),document.querySelector("#monthlySpendings"),document.querySelector("#investmentRate")];allInput.forEach(e=>{e.addEventListener("keyup",()=>{inpV(),currentAgeStatus&&retireAgeStatus&&deathAgeStatus&&monthlyIncomeStatus&&currentSavingStatus&&monthlySavingStatus&&monthlyRetirementSpendingStatus&&investmentRateStatus&&htasd(hv01(currentAge,retireAge,currentSaving,monthlySaving,annualInvestment),nw02(currentAge,retireAge,deathAge,monthlyRetirementSpending))})});let increaseDecreaseBtn=document.querySelectorAll(".button-input button");increaseDecreaseBtn.forEach(e=>{e.addEventListener("click",()=>{let t=e.parentElement.parentElement.querySelector("input");"decrease"==e.className?"monthlySavings"==t.id?t.value=Number(t.value)-50:"monthlySpendings"==t.id?t.value=Number(t.value)-100:"retireAge"==t.id||"deathAge"==t.id?t.value=Number(t.value)-1:"investmentRate"==t.id&&(t.value=Number(t.value)-.5):"increase"==e.className&&("monthlySavings"==t.id?t.value=Number(t.value)+50:"monthlySpendings"==t.id?t.value=Number(t.value)+100:"retireAge"==t.id||"deathAge"==t.id?t.value=Number(t.value)+1:"investmentRate"==t.id&&(t.value=Number(t.value)+.5)),inpV(),currentAgeStatus&&retireAgeStatus&&deathAgeStatus&&monthlyIncomeStatus&&currentSavingStatus&&monthlySavingStatus&&monthlyRetirementSpendingStatus&&investmentRateStatus&&htasd(hv01(currentAge,retireAge,currentSaving,monthlySaving,annualInvestment),nw02(currentAge,retireAge,deathAge,monthlyRetirementSpending))})});
+        toggle++;
+    });
+}
+collapseButton();
+
+//This will prevent arrowUp, arrowDown, plus, minus key to input anything
+let inputField = document.querySelectorAll("input");
+inputField.forEach((val) => {
+    val.addEventListener("keydown", function (event) {
+        // console.log(event);
+        let keys = ["ArrowUp", "ArrowDown", "+", "-"];
+        if (keys.includes(event.key)) {
+            event.preventDefault();
+        }
+    });
+});
+
+//This will prevent reload option
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    //This will prevent reload option
+});
+//
+//End
+//Start
+
+//Status check
+let currentAgeStatus = true;
+let retireAgeStatus = true;
+let deathAgeStatus = true;
+let monthlyIncomeStatus = true;
+let currentSavingStatus = true;
+let monthlySavingStatus = true;
+let monthlyRetirementSpendingStatus = true;
+let investmentRateStatus = true;
+
+//Variables
+let currentAge = document.querySelector("#age").value;
+let retireAge = document.querySelector("#retireAge").value;
+let deathAge = document.querySelector("#deathAge").value;
+let monthlyIncome = document.querySelector("#monthlyIncome").value;
+let currentSaving = document.querySelector("#currentSavings").value;
+let monthlySaving = document.querySelector("#monthlySavings").value;
+let monthlyRetirementSpending =
+    document.querySelector("#monthlySpendings").value;
+let investmentRate = document.querySelector("#investmentRate").value;
+
+//converted from percentage
+let annualInvestment = investmentRate / 100;
+let annualInflation = 3 / 100; //Fixed
+let annualRetirement = 5 / 100; //Fixed
+let toMonth = 1 / 12;
+
+function youHave(
+    current_Age,
+    retire_Age,
+    current_Saving,
+    monthly_Saving,
+    annual_Investment
+) {
+    //This will help to calculate => Monthly Investment Rate of Return, Monthly Inflation Rate & Monthly Rate of Return in Retirement
+    let monthlyRate = (rateName) => Math.pow(1 + rateName, toMonth) - 1;
+
+    function part01() {
+        let power = retire_Age - current_Age + toMonth;
+
+        let step01 = Math.pow(1 + annual_Investment, power);
+        return current_Saving * step01;
+    }
+
+    function part02() {
+        let power = (retire_Age - current_Age) * 12;
+
+        let step01 = Math.pow(1 + monthlyRate(annual_Investment), power) - 1;
+        let step02 = step01 / monthlyRate(annual_Investment);
+
+        let step03 = 1 + monthlyRate(annual_Investment);
+
+        return monthly_Saving * step02 * step03;
+    }
+    // console.log(" part01() =" + part01());
+    // console.log(" part02() =" + part02());
+    return part01() + part02();
+}
+function youNeed(
+    current_Age,
+    retire_Age,
+    death_Age,
+    monthly_Retirement_Spending
+) {
+    let power = (death_Age - retire_Age) * 12;
+    let monthlyRate = (rateName) => Math.pow(1 + rateName, toMonth) - 1;
+
+    let monthlyRetirementSpendingAdjust =
+        monthly_Retirement_Spending *
+        Math.pow(1 + annualInflation, retire_Age - current_Age);
+
+    if (annualRetirement != annualInflation) {
+        let step01 =
+            monthlyRate(annualRetirement) - monthlyRate(annualInflation);
+
+        let step02 = monthlyRetirementSpendingAdjust / step01;
+
+        let step03 = Math.pow(
+            (1 + monthlyRate(annualInflation)) /
+                (1 + monthlyRate(annualRetirement)),
+            power
+        );
+
+        return step02 * (1 - step03);
+    } else if (annualRetirement == annualInflation) {
+        let step01 =
+            monthlyRate(annualRetirement) -
+            monthlyRate(annualInflation) -
+            0.0001;
+        let step02 = monthlyRetirementSpendingAdjust / step01;
+
+        let step03 = Math.pow(
+            (1 + monthlyRate(annualInflation) + 0.0001) /
+                (1 + monthlyRate(annualRetirement)),
+            power
+        );
+
+        return step02 * (1 - step03);
+    }
+    //
+}
+//This will validate onTyping inputs
+function inputValidation() {
+    //updating values in variable
+    currentAge = document.querySelector("#age").value;
+    monthlyIncome = document.querySelector("#monthlyIncome").value;
+    currentSaving = document.querySelector("#currentSavings").value;
+    monthlySaving = document.querySelector("#monthlySavings").value;
+    monthlyRetirementSpending =
+        document.querySelector("#monthlySpendings").value;
+    retireAge = document.querySelector("#retireAge").value;
+    deathAge = document.querySelector("#deathAge").value;
+
+    investmentRate = document.querySelector("#investmentRate").value;
+    annualInvestment = investmentRate / 100;
+
+    let currAgeError = document.querySelector(".currAgeError");
+    let monthlyIncomeError = document.querySelector(".monthlyIncomeError");
+    let currentSavingError = document.querySelector(".currentSavingError");
+    let monthlySaveError = document.querySelector(".monthlySaveError");
+    let monthlyRetirementSpendingError = document.querySelector(
+        ".monthlyRetirementSpendingError"
+    );
+    let retireAgeError = document.querySelector(".retireAgeError");
+    let deathAgeError = document.querySelector(".deathAgeError");
+    let investmentRateError = document.querySelector(".investmentRateError");
+
+    //This will validate current age
+    function currentAgeValidation() {
+        if (currentAge < 18) {
+            currentAgeStatus = false;
+            currAgeError.innerHTML = "Age must be at least 18";
+        } else if (currentAge > 90) {
+            currentAgeStatus = false;
+            currAgeError.innerHTML = "Age must be at most 90";
+        } else if (currentAge >= 18 && currentAge <= 90) {
+            currentAgeStatus = true;
+            currAgeError.innerHTML = "";
+        }
+    }
+    currentAgeValidation();
+
+    //This will validate annual income
+    function monthlyIncomeValidation() {
+        if (monthlyIncome.value < 0) {
+            monthlyIncomeStatus = false;
+            monthlyIncomeError.innerHTML =
+                "Pre-tax income should be 0 or more.";
+        } else if (monthlyIncome.value > 9000000) {
+            monthlyIncomeStatus = false;
+            monthlyIncomeError.innerHTML =
+                "Pre-tax income shouldn't be more than 9000000";
+        } else if (monthlyIncome.value >= 0 && monthlyIncome.value <= 9000000) {
+            monthlyIncomeStatus = true;
+            monthlyIncomeError.innerHTML = "";
+        }
+    }
+    monthlyIncomeValidation();
+
+    //This will validate current saving
+    function currentSavingValidation() {
+        if (currentSaving.value < 0) {
+            currentSavingStatus = false;
+            currentSavingError.innerHTML =
+                "Current savings should be 0 or more.";
+        } else if (currentSaving.value > 900000000) {
+            currentSavingStatus = false;
+            currentSavingError.innerHTML =
+                "Current savings shouldn't be more than 900000000";
+        } else if (
+            currentSaving.value >= 0 &&
+            currentSaving.value <= 900000000
+        ) {
+            currentSavingStatus = true;
+            currentSavingError.innerHTML = "";
+        }
+    }
+    currentSavingValidation();
+
+    function monthlySavingValidation() {
+        let monthlySavepercent = Math.round(
+            (monthlySaving * 100) / monthlyIncome
+        );
+        let incomePercentTag = document.querySelector(
+            ".info-2 small.incomePercent"
+        );
+
+        if (monthlySaving < 0) {
+            monthlySavingStatus = false;
+            incomePercentTag.classList.add("hidden");
+
+            monthlySaveError.innerHTML = "Monthly income cannot be less than 0";
+        } //
+        else if (monthlySavepercent > 75) {
+            monthlySavingStatus = false;
+            incomePercentTag.classList.add("hidden");
+            monthlySaveError.innerHTML = `Montly income shouldn't be more than 75% of annual income`;
+        } //
+        else if (monthlySaving > 0 && monthlySavepercent < 75) {
+            monthlySavingStatus = true;
+            incomePercentTag.classList.remove("hidden");
+
+            monthlySaveError.innerHTML = "";
+        }
+    }
+    monthlySavingValidation();
+
+    function monthlyRetirementSpendingValidation() {
+        if (monthlyRetirementSpending < 0) {
+            monthlyRetirementSpendingStatus = false;
+            monthlyRetirementSpendingError.innerHTML = `Monthly retirement spending shouldn't be less than 0`;
+        } else if (monthlyRetirementSpending > 0) {
+            monthlyRetirementSpendingStatus = true;
+            monthlyRetirementSpendingError.innerHTML = "";
+        }
+    }
+    monthlyRetirementSpendingValidation();
+
+    function retireAgeValidation() {
+        if (retireAge < 30) {
+            retireAgeStatus = false;
+            retireAgeError.innerHTML =
+                "Retire age should be equal or more than 30";
+        } else if (retireAge > 85) {
+            retireAgeStatus = false;
+            retireAgeError.innerHTML = `Retire age should be equal or less than 85`;
+        } else if (retireAge >= 30 && retireAge <= 85) {
+            retireAgeStatus = true;
+            retireAgeError.innerHTML = "";
+        }
+    }
+    retireAgeValidation();
+
+    function deathAgeValidation() {
+        if (deathAge < 71) {
+            deathAgeStatus = false;
+            deathAgeError.innerHTML =
+                "Death age should be equal or more than 71";
+        } else if (deathAge > 120) {
+            deathAgeStatus = false;
+            deathAgeError.innerHTML = `Death age should be equal or less than 120`;
+        } else if (deathAge >= 71 && deathAge <= 120) {
+            deathAgeStatus = true;
+            deathAgeError.innerHTML = "";
+        }
+    }
+    deathAgeValidation();
+
+    function investmentRateValidation() {
+        if (investmentRate < 0) {
+            investmentRateStatus = false;
+            investmentRateError.innerHTML =
+                "Investment Rate should be equal or more than 0";
+        } else if (investmentRate > 15) {
+            investmentRateStatus = false;
+            investmentRateError.innerHTML = `Investment Rate  should be equal or less than 15`;
+        } else if (investmentRate >= 0 && investmentRate <= 15) {
+            investmentRateStatus = true;
+            investmentRateError.innerHTML = "";
+        }
+    }
+    investmentRateValidation();
+}
+//This will show output to HTML page
+function outputToDom(willHave, willNeed) {
+    console.log(document.querySelector("#investmentRate").value);
+    console.log(annualInvestment);
+    //This will calculate percentage (Limit for 0 and 100)
+    let percent = () => {
+        let percent = Math.round((willHave * 100) / willNeed);
+        if (percent <= 0) {
+            percent = 0;
+        } else if (percent >= 100) {
+            percent = 100;
+        }
+        return percent;
+    };
+
+    function monthlySavePercent() {
+        let percent = Math.round((monthlySaving * 100) / monthlyIncome);
+        document.querySelector(
+            ".info-2 small.incomePercent"
+        ).innerHTML = `${percent}% of my monthly income`;
+    }
+    monthlySavePercent();
+
+    function retireAgeShow() {
+        let retireAge0 = document.querySelector(".retireAgeShow");
+
+        retireAge0.innerHTML = retireAge;
+    }
+    retireAgeShow();
+    //This will show the amount
+    function amountShow() {
+        let haveAmount = document.querySelector(".have-amount");
+        let needAmount = document.querySelector(".need-amount");
+        haveAmount.innerHTML = (willHave / 1000000).toFixed(2) + "M";
+        needAmount.innerHTML = (willNeed / 1000000).toFixed(2) + "M";
+    }
+    amountShow();
+
+    //It will show the percentage
+    function percentShow() {
+        let percentClass = document.querySelector(".percent");
+        percentClass.innerHTML = percent() + "%";
+    }
+    percentShow();
+
+    //It will move the vertical up down bar
+    function verticalProgress() {
+        let haveSubBar = document.querySelector(".output .sub-have-bar");
+        let needSubBar = document.querySelector(".output .sub-need-bar");
+
+        let haveAmount = document.querySelector(".output .have-amount");
+        let needAmount = document.querySelector(".output .need-amount");
+
+        let percentage;
+
+        if (willHave < willNeed) {
+            percentage = Math.round((willHave * 100) / willNeed);
+
+            if (percentage < 0) {
+                haveSubBar.style.height = `99.5%`;
+                needSubBar.style.height = `${0}%`;
+
+                haveAmount.style.top = `78%`;
+                needAmount.style.top = "-20%";
+            } else {
+                haveSubBar.style.height = `${100 - percentage}%`;
+                needSubBar.style.height = `${0}%`;
+
+                haveAmount.style.top = `${100 - percentage - 20}%`;
+                needAmount.style.top = "-20%";
+            }
+        } //
+        else if (willHave > willNeed) {
+            percentage = Math.round((willNeed * 100) / willHave);
+
+            console.log(percentage);
+            if (percentage <= 0) {
+                console.log("exclude");
+                haveSubBar.style.height = `${0}%`;
+                needSubBar.style.height = `${100 - 0.5}%`;
+
+                haveAmount.style.top = "-20%";
+                needAmount.style.top = `${100 - 0.5 - 20}%`;
+            } else {
+                haveSubBar.style.height = `${0}%`;
+                needSubBar.style.height = `${100 - percentage}%`;
+
+                haveAmount.style.top = "-20%";
+                needAmount.style.top = `${100 - percentage - 20}%`;
+            }
+        }
+    }
+    verticalProgress();
+
+    //It will move the horizontal bar
+    function horizontalProgress() {
+        let first = document.querySelector(".attention-describe");
+        let second = document.querySelector(".onWay-describe ");
+        let third = document.querySelector(".gettingClose-describe");
+        let fourth = document.querySelector(".onTrack-describe");
+
+        let moveDiv = document.querySelector(
+            ".horizontal-progress .move .space"
+        );
+        let moveIcon = document.querySelector(
+            ".horizontal-progress .icon .iconSpace"
+        );
+        let haveBar = document.querySelector(".verticale-progress .have-bar");
+
+        //This will add hidden class and remove hidden class
+        function hiddenClassAdd(position) {
+            [first, second, third, fourth].forEach((val) => {
+                val == position
+                    ? val.classList.remove("hidden")
+                    : val.classList.add("hidden");
+            });
+        }
+
+        //This will calculate icon position
+        function moveIconPosition() {
+            let step1 = 65.5 * 0.49; //to get accuracy used 0.49 instead of 0.5
+            // 65.5 - 0 = 65.5  //1st part
+            //32 - 0 = 32    //icon position in 1st part
+            // 32 / 65.5 = 0.49
+            let step2 = 15 * 1.87; //to get accuracy used 1.86 instead of 1.87
+            //80.5 - 65.5 = 15  //2nd part
+            //60 - 32 = 28      //Icon position in 2nd part
+            //28 / 15 = 1.87
+            let step3 = 15 * 1.47;
+            //95.5 - 80.5 = 15; //3rd part
+            //82 - 60 = 22      //Icon position in 3rd part
+            //22 / 15 = 1.47
+            let step04 = 4.5 * 4; //it has no need.
+            //100 - 95.5 = 4.5  //4th part
+            //100 - 82 = 18      //Icon position in 4th part
+            //18 / 4.5 = 4
+
+            if (percent() > 0 && percent() <= 65.5) {
+                return percent() * 0.5;
+            } // 65.5 - 0 = 65.5
+            else if (percent() >= 65.6 && percent() <= 80.5) {
+                return step1 + (percent() - 65.5) * 1.87;
+            } //80.5 - 65.5 = 15
+            else if (percent() >= 80.6 && percent() <= 95.5) {
+                return step1 + step2 + (percent() - 80.5) * 1.47;
+            } //95.5 - 80.5 = 15
+            else if (percent() >= 95.6 && percent() <= 100) {
+                return step1 + step2 + step3 + (percent() - 95.5) * 3.44;
+            } //100 - 95.5 = 4.5
+        }
+
+        //This will calculate moveBar position
+        function moveBarPosition() {
+            let step1 = 65.5 * 0.344;
+            // 65.5 - 0 = 65.5  //1st part
+            ////18.5 - 0 = 18.5    //moveBar position in 1st part
+            //22.5 - 0 = 22.5    //moveBar position in 1st part NEW
+            // 22.5 / 65.5 = 0.344
+            let step2 = 15 * 1.87;
+            //80.5 - 65.5 = 15  //2nd part
+            //4//7.5 - 18.5 = 29      //moveBar position in 2nd part
+            //50.5 - 22.5 = 28      //moveBar position in 2nd part NEW
+            //28 / 15 = 1.87
+            let step3 = 15 * 1.43;
+            //95.5 - 80.5 = 15; //3rd part
+            ////68.5 - 47.5 = 21      //moveBar position in 3rd part
+            //72 - 50.5 = 21.5      //moveBar position in 3rd part NEW
+            //21.5 / 15 = 1.43;
+            let step04 = 4.5 * 0.88; //it has no need.
+            //100 - 95.5 = 4.5  //4th part
+            ////70.5 - 68.5 = 2      //moveBar position in 4th part
+            //76 - 72 = 4      //moveBar position in 4th part NEW
+            //4 / 4.5 = 0.88
+
+            if (percent() > 0 && percent() <= 65.5) {
+                return percent() * 0.344;
+            } //
+            else if (percent() >= 65.6 && percent() <= 80.5) {
+                return step1 + (percent() - 65.5) * 1.87;
+            } //
+            else if (percent() >= 80.6 && percent() <= 95.5) {
+                return step1 + step2 + (percent() - 80.5) * 1.43;
+            } //
+            else if (percent() >= 95.6 && percent() <= 100) {
+                return step1 + step2 + step3 + (percent() - 95.5) * 0.67;
+            }
+        }
+
+        if (percent() >= 0 && percent() <= 65.5) {
+            hiddenClassAdd(first);
+
+            moveIcon.style.flexBasis = `${moveIconPosition()}%`;
+            moveDiv.style.flexBasis = `calc(${moveBarPosition()}% - 26px)`;
+            haveBar.style.backgroundColor = "#fc6f56";
+        } else if (percent() >= 65.6 && percent() <= 80.5) {
+            hiddenClassAdd(second);
+
+            moveIcon.style.flexBasis = `${moveIconPosition()}%`;
+            moveDiv.style.flexBasis = `calc(${moveBarPosition()}% - 12px)`;
+            haveBar.style.backgroundColor = "#ffbf00";
+        } else if (percent() >= 80.6 && percent() <= 95.5) {
+            hiddenClassAdd(third);
+
+            moveIcon.style.flexBasis = `${moveIconPosition()}%`;
+            moveDiv.style.flexBasis = `calc(${moveBarPosition()}% - 12px)`;
+            haveBar.style.backgroundColor = "#1cacca";
+        } else if (percent() >= 95.6 && percent() <= 100) {
+            hiddenClassAdd(fourth);
+
+            moveIcon.style.flexBasis = `${moveIconPosition()}%`;
+            moveDiv.style.flexBasis = `calc(${moveBarPosition()}% - 12px)`;
+            haveBar.style.backgroundColor = "#8fd832";
+        }
+    }
+    horizontalProgress();
+}
+
+//Array of Inputs
+let allInput = [
+    document.querySelector("#age"),
+    document.querySelector("#retireAge"),
+    document.querySelector("#deathAge"),
+
+    document.querySelector("#monthlyIncome"),
+    document.querySelector("#currentSavings"),
+    document.querySelector("#monthlySavings"),
+
+    document.querySelector("#monthlySpendings"),
+    document.querySelector("#investmentRate"),
+];
+//Show output
+//After giving input it will work
+allInput.forEach((val) => {
+    val.addEventListener("keyup", () => {
+        inputValidation();
+
+        if (
+            currentAgeStatus &&
+            retireAgeStatus &&
+            deathAgeStatus &&
+            monthlyIncomeStatus &&
+            currentSavingStatus &&
+            monthlySavingStatus &&
+            monthlyRetirementSpendingStatus &&
+            investmentRateStatus
+        ) {
+            outputToDom(
+                youHave(
+                    currentAge,
+                    retireAge,
+                    currentSaving,
+                    monthlySaving,
+                    annualInvestment
+                ),
+                youNeed(
+                    currentAge,
+                    retireAge,
+                    deathAge,
+                    monthlyRetirementSpending
+                )
+            );
+        }
+    });
+    //
+});
+
+//Show output
+//After clicking on Increment & Decrement button, it will change the value
+let increaseDecreaseBtn = document.querySelectorAll(".button-input button");
+increaseDecreaseBtn.forEach((val) => {
+    val.addEventListener("click", () => {
+        let parent = val.parentElement.parentElement;
+        let input = parent.querySelector("input");
+
+        //if else started
+        if (val.className == "decrease") {
+            if (input.id == "monthlySavings") {
+                input.value = Number(input.value) - 50;
+            } else if (input.id == "monthlySpendings") {
+                input.value = Number(input.value) - 100;
+            } else if (input.id == "retireAge" || input.id == "deathAge") {
+                input.value = Number(input.value) - 1;
+            } else if (input.id == "investmentRate") {
+                input.value = Number(input.value) - 0.5;
+            }
+            //
+        } else if (val.className == "increase") {
+            if (input.id == "monthlySavings") {
+                input.value = Number(input.value) + 50;
+            } else if (input.id == "monthlySpendings") {
+                input.value = Number(input.value) + 100;
+            } else if (input.id == "retireAge" || input.id == "deathAge") {
+                input.value = Number(input.value) + 1;
+            } else if (input.id == "investmentRate") {
+                input.value = Number(input.value) + 0.5;
+            }
+        }
+        //if else ended
+
+        inputValidation();
+
+        if (
+            currentAgeStatus &&
+            retireAgeStatus &&
+            deathAgeStatus &&
+            monthlyIncomeStatus &&
+            currentSavingStatus &&
+            monthlySavingStatus &&
+            monthlyRetirementSpendingStatus &&
+            investmentRateStatus
+        ) {
+            outputToDom(
+                youHave(
+                    currentAge,
+                    retireAge,
+                    currentSaving,
+                    monthlySaving,
+                    annualInvestment
+                ),
+                youNeed(
+                    currentAge,
+                    retireAge,
+                    deathAge,
+                    monthlyRetirementSpending
+                )
+            );
+        }
+    });
+});
